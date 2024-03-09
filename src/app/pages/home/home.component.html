@@ -1,0 +1,7 @@
+<section class="mt-4 row">
+    @for(user of arrUsers; track user.id){
+    <article class="col-12 col-md-6 col-lg-4">
+      <app-user-card [myUser]="user"></app-user-card>
+    </article>
+    }
+</section>
