@@ -18,8 +18,8 @@ export class UserViewComponent {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params:any) => {
-      let id = Number(params.id)
-      let response: any = this.userServices.getById(id);
+      //let id = Number(params.id)
+      let response: any = this.userServices.getById(params.id);
       if (response !== undefined) {
         this.user = response;
       }

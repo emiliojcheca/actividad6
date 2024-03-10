@@ -1,0 +1,44 @@
+<section class="container mt-2">
+    <form [formGroup]="modelForm" class="card p-3 shadow" (ngSubmit)="getDataForm()">
+        <div class="my-2">
+            <label for="firstname" class="form-label">Nombre Usuario</label>
+            <input type="text" class="form-control" placeholder="Introduzca nombre de usuario" id="firstname" formControlName="firstname">
+            @if (checkControl("firstname","required")) {
+                <p class="error">Campo requerido</p>
+            }
+            @if (checkControl("firstname","minlength")) {
+                <p class="error">El campo tiene que tener al menos 3 caracteres</p>
+            }
+        </div>
+        <div class="my-2">
+            <label for="lastname" class="form-label">Apellido Usuario</label>
+            <input type="text" class="form-control" placeholder="Introduzca apellido de usuario" id="lastname" formControlName="lastname">
+            @if (checkControl("lastname","required")) {
+                <p class="error">Campo requerido</p>
+            }
+            @if (checkControl("firstname","minlength")) {
+                <p class="error">El campo tiene que tener al menos 3 caracteres</p>
+            }
+        </div>
+        <div class="my-2">
+            <label for="email" class="form-label">Email Usuario</label>
+            <input type="email" class="form-control" placeholder="Introduzca email de usuario" id="email" formControlName="email">
+            @if (checkControl("email","required")) {
+                <p class="error">Campo requerido</p>
+            }
+            @if (checkControl("email","email")) {
+                <p class="error">Tiene que tener formato de email</p>
+            }
+        </div>
+        <div class="my-2">
+            <label for="img" class="form-label">Imagen Usuario</label>
+            <input type="email" class="form-control" placeholder="Introduzca url de foto de usuario" id="img" formControlName="img">
+            @if (checkControl("img","required")) {
+                <p class="error">Campo requerido</p>
+            }
+        </div>
+
+
+        <input type="submit" value="Enviar" class="btn btn-secondary" [disabled]="!modelForm.valid">
+    </form>
+</section>

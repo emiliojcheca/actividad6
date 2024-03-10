@@ -11,12 +11,17 @@ import { UserCardComponent } from '../../components/user-card/user-card.componen
   styleUrl: './user-list.component.css'
 })
 export class UserListComponent {
-  
-  arrUsers: IUser[] = []
+
+  arrUsers: IUser[] = [];
   userServices = inject(UserService);
 
-  ngOnInit() {
-    this.arrUsers = this.userServices.getAll();
+  async ngOnInit(): Promise<void> {
+    //metodo promesa
+    try {
+      this.arrUsers = await this.userServices.getAllPromises()
+    } catch (err) {
+      console.log(err)
+    }
   }
 
 }
