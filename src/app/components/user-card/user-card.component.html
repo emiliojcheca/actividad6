@@ -1,7 +1,42 @@
 <div class="card p-3">
-    <h3 class="card-title">{{myUser.first_name}} {{myUser.first_name}}</h3>
     <figure>
-      <img class="img-fluid" [src]="myUser.image" alt="">
+      <img class="rounded-circle img-fluid px-5" [src]="myUser.image" alt="">
     </figure>
-    <a [routerLink]="['/', 'user', myUser.id]" class="btn btn-primary">Ver detalle</a>
+    <h5 class="card-title text-center">{{myUser.first_name}} {{myUser.last_name}}</h5>
+    <div class="container-fluid">
+        <div class="d-flex flex-row justify-content-center gap-3">
+            <div class="border-3 rounded-2">
+                <a [routerLink]="['/', 'user', myUser.id]" class="nav-link">
+                    <div class="text-center">
+                        <div class="fs-3">
+                            <i class="bi bi-search"></i>
+                        </div>
+                        <p class="action-text">Ver detalle</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a [routerLink]="['/', 'user', myUser.id]" class="nav-link">
+                    <div class="text-center">
+                        <div class="fs-3">
+                            <i class="bi bi-pencil-square"></i>
+                        </div>
+                        <p class="action-text">Actualizar</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a [routerLink]="['/', 'user', myUser.id]" class="nav-link">
+                    <div class="text-center">
+                        <div class="fs-3">
+                            <i class="bi bi-trash"></i>
+                        </div>
+                        <p class="action-text">Borrar</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    
 </div>
