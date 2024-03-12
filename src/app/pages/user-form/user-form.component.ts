@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-user-form',
@@ -9,39 +12,61 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
   styleUrl: './user-form.component.css'
 })
 export class UserFormComponent {
-  modelForm: FormGroup;
+
+  userForm: FormGroup;
+  userServices = inject(UserService);
+  router = inject(Router)
+  activatedRoute = inject(ActivatedRoute)
 
   constructor() {
-    this.modelForm = new FormGroup({
-      firstname: new FormControl(null, [Validators.required, Validators.minLength(3)]),
-      lastname: new FormControl(null, [Validators.required, Validators.minLength(3)]),
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      img: new FormControl(null, [Validators.required]),
-    }, []);
+    this.userForm = new FormGroup({
+      firstname: new FormControl("", [Validators.required, Validators.minLength(3)]),
+      lastname: new FormControl("", [Validators.required, Validators.minLength(3)]),
+      email: new FormControl("", [Validators.required, Validators.email]),
+      img: new FormControl("", [Validators.required])
+    }, [])
   }
 
-  ngOnInit(): void {
-    let obj = {
-      firstname:"Emilio J.",
-      lastname: "Checa Rodríguez",
-      email:"emilioj.checa@gmail.com",
-      img: "https://i.pravatar.cc/500"
+  ngOnInit() {
+    this.activatedRoute.params.subscribe(async (params: any) => {
+      if (params.id) {
+        const response = await this.userServices.getById(params.id)
+        this.userForm = new FormGroup({
+          firstname: new FormControl(response.first_name, [Validators.required, Validators.minLength(3)]),
+          lastname: new FormControl(response.last_name, [Validators.required, Validators.minLength(3)]),
+          email: new FormControl(response.email, [Validators.required, Validators.email]),
+          img: new FormControl(response.image, [Validators.required])
+        }, [])
+
+
+      }
+    })
+  }
+
+  async getDataForm() {
+    if (this.userForm.value._id) {
+      //actualizando
+      const response = await this.userServices.update(this.userForm.value);
+      if (response.id) {
+        Swal.fire(`El usuario ${response.first_name} ${response.last_name} se ha actualizado correctamente`);
+        this.router.navigate(['/home'])
+      }
+      else {
+        Swal.fire('Ha habido un problema intentalo de nuevo')
+      }
+    } else {
+      const response = await this.userServices.insert(this.userForm.value)
+      if (response.id) {
+        Swal.fire(`El usuario ${response.first_name} ${response.last_name} se ha añadido correctamente`)
+        this.router.navigate(['/home'])
+      } else {
+        Swal.fire('Ha habido un problema intentalo de nuevo')
+      }
     }
-
-    this.modelForm = new FormGroup({
-      firstname: new FormControl(obj.firstname, [Validators.required, Validators.minLength(3)]),
-      lastname: new FormControl(obj.lastname, [Validators.required, Validators.minLength(3)]),
-      email: new FormControl(obj.email, [Validators.required, Validators.email]),
-      img: new FormControl(obj.img, [Validators.required])
-    }, []);
-  }
-
-  getDataForm(): void {
-    console.log(this.modelForm.value);
-    this.modelForm.reset();
   }
 
   checkControl(formControlName: string, validador: string): boolean | undefined {
-    return this.modelForm.get(formControlName)?.hasError(validador) && this.modelForm.get(formControlName)?.touched;
+    return this.userForm.get(formControlName)?.hasError(validador) && this.userForm.get(formControlName)?.touched;
   }
+
 }

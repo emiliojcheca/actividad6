@@ -1,5 +1,5 @@
 <section class="container mt-2">
-    <form [formGroup]="modelForm" class="card p-3 shadow" (ngSubmit)="getDataForm()">
+    <form [formGroup]="userForm" class="card p-3 shadow" (ngSubmit)="getDataForm()">
         <div class="my-2">
             <label for="firstname" class="form-label">Nombre Usuario</label>
             <input type="text" class="form-control" placeholder="Introduzca nombre de usuario" id="firstname" formControlName="firstname">
@@ -39,6 +39,6 @@
         </div>
 
 
-        <input type="submit" value="Enviar" class="btn btn-secondary" [disabled]="!modelForm.valid">
+        <input type="submit" value="Enviar" class="btn btn-secondary" [disabled]="!userForm.valid">
     </form>
 </section>
