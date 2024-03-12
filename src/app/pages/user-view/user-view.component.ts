@@ -14,16 +14,24 @@ export class UserViewComponent {
 
   activatedRoute = inject(ActivatedRoute);
   userServices = inject(UserService);
-  user!: IUser;
+  user: IUser = {
+    _id: "",
+    id: 0,
+    first_name: "",
+    last_name: "",
+    username: "",
+    email: "",
+    image: "",
+    password: ""
+  };
 
-  ngOnInit() {
-    this.activatedRoute.params.subscribe((params:any) => {
+  ngOnInit(): void {
+    this.activatedRoute.params.subscribe(async (params:any) => {
       //let id = Number(params.id)
       console.log("ID solicitado: " + params.id);
-      let response: any = this.userServices.getById(params.id);
-      if (response !== undefined) {
-        this.user = response;
-      }
+      this.user = await this.userServices.getById(params.id);
+
+      console.log("response en user-view: ",this.user);
     })
   }
 
