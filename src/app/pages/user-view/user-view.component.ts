@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { IUser } from '../../interfaces/iuser.interface';
 import Swal from 'sweetalert2';
@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 export class UserViewComponent {
 
   activatedRoute = inject(ActivatedRoute);
+  router = inject(Router)
   userServices = inject(UserService);
   user: IUser = {
     _id: "",
@@ -58,6 +59,7 @@ export class UserViewComponent {
               text: "Se ha borrado correctamente el usuario " + response.first_name + " " + response.last_name,
               icon: "success"
             });
+            this.router.navigate(['/home']);
           }
         }
       });

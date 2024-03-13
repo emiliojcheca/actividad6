@@ -22,14 +22,14 @@ export class UserCardComponent {
     if (id !== undefined) {
 
       Swal.fire({
-        title: "¿Seguro que desea eliminar al usuario " + this.myUser.first_name + " " + this.myUser.last_name + "?",
-        text: "No podrá revertir esta",
+        title: "¿Deseas borrar al usuario " + this.myUser.first_name + " " + this.myUser.last_name + "?",
+        text: "No podrá revertir esta acción",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         cancelButtonText: "Cancelar",
-        confirmButtonText: "Eliminar"
+        confirmButtonText: "Aceptar"
       }).then(async (result) => {
         if (result.isConfirmed) {
           let response = await this.userService.delete(id);

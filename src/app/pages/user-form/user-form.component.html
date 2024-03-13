@@ -3,38 +3,38 @@
         <div class="my-2">
             <label for="first_name" class="form-label">Nombre Usuario</label>
             <input type="text" class="form-control" placeholder="Introduzca nombre de usuario" id="first_name" formControlName="first_name">
-            @if (checkControl("firstname","required")) {
-                <p class="error">Campo requerido</p>
+            @if (checkControl("first_name","required")) {
+                <p class="text-danger small">Campo requerido</p>
             }
-            @if (checkControl("firstname","minlength")) {
-                <p class="error">El campo tiene que tener al menos 3 caracteres</p>
+            @if (checkControl("first_name","minlength")) {
+                <p class="text-danger small">El campo tiene que tener al menos 3 caracteres</p>
             }
         </div>
         <div class="my-2">
             <label for="last_name" class="form-label">Apellido Usuario</label>
             <input type="text" class="form-control" placeholder="Introduzca apellido de usuario" id="last_name" formControlName="last_name">
-            @if (checkControl("lastname","required")) {
-                <p class="error">Campo requerido</p>
+            @if (checkControl("last_name","required")) {
+                <p class="text-danger small">Campo requerido</p>
             }
-            @if (checkControl("firstname","minlength")) {
-                <p class="error">El campo tiene que tener al menos 3 caracteres</p>
+            @if (checkControl("last_name","minlength")) {
+                <p class="text-danger small">El campo tiene que tener al menos 3 caracteres</p>
             }
         </div>
         <div class="my-2">
             <label for="email" class="form-label">Email Usuario</label>
             <input type="email" class="form-control" placeholder="Introduzca email de usuario" id="email" formControlName="email">
             @if (checkControl("email","required")) {
-                <p class="error">Campo requerido</p>
+                <p class="text-danger">Campo requerido</p>
             }
             @if (checkControl("email","email")) {
-                <p class="error">Tiene que tener formato de email</p>
+                <p class="text-danger small">Tiene que tener formato de email</p>
             }
         </div>
         <div class="my-2">
             <label for="img" class="form-label">Imagen Usuario</label>
             <input type="email" class="form-control" placeholder="Introduzca url de foto de usuario" id="img" formControlName="img">
             @if (checkControl("img","required")) {
-                <p class="error">Campo requerido</p>
+                <p class="text-danger small">Campo requerido</p>
             }
         </div>
 

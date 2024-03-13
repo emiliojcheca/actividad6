@@ -16,7 +16,7 @@
         </div>
         <div class="py-3 d-flex flex-row gap-2">
             <a (click)="deleteUser(user._id)" class="btn btn-outline-dark">Eliminar</a>
-            <a [routerLink]="['/update', 'user', user._id]" class="btn btn-outline-dark">Actualizar</a>
+            <a [routerLink]="['', 'updateuser', user._id]" class="btn btn-outline-dark">Actualizar</a>
             <a [routerLink]="['/home']" class="btn btn-outline-dark">Volver al listado</a>
         </div>
         
