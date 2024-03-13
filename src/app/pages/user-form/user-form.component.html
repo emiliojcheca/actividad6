@@ -1,8 +1,8 @@
 <section class="container mt-2">
     <form [formGroup]="userForm" class="card p-3 shadow" (ngSubmit)="getDataForm()">
         <div class="my-2">
-            <label for="firstname" class="form-label">Nombre Usuario</label>
-            <input type="text" class="form-control" placeholder="Introduzca nombre de usuario" id="firstname" formControlName="firstname">
+            <label for="first_name" class="form-label">Nombre Usuario</label>
+            <input type="text" class="form-control" placeholder="Introduzca nombre de usuario" id="first_name" formControlName="first_name">
             @if (checkControl("firstname","required")) {
                 <p class="error">Campo requerido</p>
             }
@@ -11,8 +11,8 @@
             }
         </div>
         <div class="my-2">
-            <label for="lastname" class="form-label">Apellido Usuario</label>
-            <input type="text" class="form-control" placeholder="Introduzca apellido de usuario" id="lastname" formControlName="lastname">
+            <label for="last_name" class="form-label">Apellido Usuario</label>
+            <input type="text" class="form-control" placeholder="Introduzca apellido de usuario" id="last_name" formControlName="last_name">
             @if (checkControl("lastname","required")) {
                 <p class="error">Campo requerido</p>
             }

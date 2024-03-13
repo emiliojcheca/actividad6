@@ -20,8 +20,8 @@ export class UserFormComponent {
 
   constructor() {
     this.userForm = new FormGroup({
-      firstname: new FormControl("", [Validators.required, Validators.minLength(3)]),
-      lastname: new FormControl("", [Validators.required, Validators.minLength(3)]),
+      first_name: new FormControl("", [Validators.required, Validators.minLength(3)]),
+      last_name: new FormControl("", [Validators.required, Validators.minLength(3)]),
       email: new FormControl("", [Validators.required, Validators.email]),
       img: new FormControl("", [Validators.required])
     }, [])
@@ -32,8 +32,9 @@ export class UserFormComponent {
       if (params.id) {
         const response = await this.userServices.getById(params.id)
         this.userForm = new FormGroup({
-          firstname: new FormControl(response.first_name, [Validators.required, Validators.minLength(3)]),
-          lastname: new FormControl(response.last_name, [Validators.required, Validators.minLength(3)]),
+          _id: new FormControl(response._id, []),
+          first_name: new FormControl(response.first_name, [Validators.required, Validators.minLength(3)]),
+          last_name: new FormControl(response.last_name, [Validators.required, Validators.minLength(3)]),
           email: new FormControl(response.email, [Validators.required, Validators.email]),
           img: new FormControl(response.image, [Validators.required])
         }, [])
@@ -44,10 +45,12 @@ export class UserFormComponent {
   }
 
   async getDataForm() {
+    console.log("this.userForm.value._id", this.userForm.value._id);
     if (this.userForm.value._id) {
       //actualizando
       const response = await this.userServices.update(this.userForm.value);
       if (response.id) {
+        console.log("Actualización response: ", response);
         Swal.fire(`El usuario ${response.first_name} ${response.last_name} se ha actualizado correctamente`);
         this.router.navigate(['/home'])
       }
@@ -57,6 +60,7 @@ export class UserFormComponent {
     } else {
       const response = await this.userServices.insert(this.userForm.value)
       if (response.id) {
+        console.log("Inserción response: ", response);
         Swal.fire(`El usuario ${response.first_name} ${response.last_name} se ha añadido correctamente`)
         this.router.navigate(['/home'])
       } else {

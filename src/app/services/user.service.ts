@@ -1,8 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { IUser } from '../interfaces/iuser.interface';
-import { USERS } from '../db/users.db';
 import { HttpClient } from '@angular/common/http';
-import { Observable, lastValueFrom } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 import { IServiceResponse } from '../interfaces/iserviceresponse.interface';
 
 @Injectable({
@@ -16,8 +15,7 @@ export class UserService {
 
   
 
-  //Promises
-  async getAll(): Promise<IUser[]> {
+    async getAll(): Promise<IUser[]> {
     let arrUsers: IUser[] = [];
     
     await lastValueFrom(this.httpClient.get<IServiceResponse>(this.baseUrl)).then(response => {

@@ -15,8 +15,8 @@
             <p class="fw-bold">Email:</p><p>{{user.email}}</p>
         </div>
         <div class="py-3 d-flex flex-row gap-2">
-            <a [routerLink]="['/home']" class="btn btn-outline-dark">Eliminar</a>
-            <a [routerLink]="['/home']" class="btn btn-outline-dark">Actualizar</a>
+            <a (click)="deleteUser(user._id)" class="btn btn-outline-dark">Eliminar</a>
+            <a [routerLink]="['/update', 'user', user._id]" class="btn btn-outline-dark">Actualizar</a>
             <a [routerLink]="['/home']" class="btn btn-outline-dark">Volver al listado</a>
         </div>
         
