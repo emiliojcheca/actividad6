@@ -15,7 +15,7 @@ export class UserService {
 
   
 
-    async getAll(): Promise<IUser[]> {
+  async getAll(): Promise<IUser[]> {
     let arrUsers: IUser[] = [];
     
     await lastValueFrom(this.httpClient.get<IServiceResponse>(this.baseUrl)).then(response => {

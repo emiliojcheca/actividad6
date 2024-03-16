@@ -48,16 +48,19 @@ export class UserFormComponent {
     if (this.userForm.value._id) {
       //actualizando
       const response = await this.userServices.update(this.userForm.value);
-      if (response.id) {
+      if (response.error !== undefined) {
+        Swal.fire(`Se ha producido el siguiente error: ${response.error}`);
+      } else if (response.id) {
         Swal.fire(`El usuario ${response.first_name} ${response.last_name} se ha actualizado correctamente`);
         this.router.navigate(['/home'])
-      }
-      else {
+      } else {
         Swal.fire('Ha habido un problema intentalo de nuevo')
       }
     } else {
       const response = await this.userServices.insert(this.userForm.value)
-      if (response.id) {
+      if (response.error !== undefined) {
+        Swal.fire(`Se ha producido el siguiente error: ${response.error}`);
+      } else if (response.id) {
         Swal.fire(`El usuario ${response.first_name} ${response.last_name} se ha añadido correctamente`)
         this.router.navigate(['/home'])
       } else {

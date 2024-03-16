@@ -33,6 +33,11 @@ export class UserViewComponent {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(async (params:any) => {
       this.user = await this.userServices.getById(params.id);
+      if (this.user.error !== undefined) {
+        console.log("error:", this.user.error);
+        Swal.fire(`Se ha producido el siguiente error: ${this.user.error}`);
+        this.router.navigate(['/home'])
+      }
     })
   }
 

@@ -29,7 +29,9 @@ export class UserUtils {
           }).then(async (result) => {
             if (result.isConfirmed) {
               let response = await this.userService.delete(id);
-              if (response._id) {
+              if (response.error !== undefined) {
+                Swal.fire(`Se ha producido el siguiente error: ${response.error}`);
+              } else if (response._id) {
                 Swal.fire({
                   title: "Eliminado!",
                   text: "Se ha borrado correctamente el usuario " + response.first_name + " " + response.last_name,

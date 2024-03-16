@@ -7,4 +7,5 @@ export interface IUser {
     email: string;
     image: string;
     password: string;
+    error?: string;
 }
