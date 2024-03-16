@@ -32,11 +32,7 @@ export class UserViewComponent {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(async (params:any) => {
-      //let id = Number(params.id)
-      console.log("ID solicitado: " + params.id);
       this.user = await this.userServices.getById(params.id);
-
-      console.log("response en user-view: ",this.user);
     })
   }
 

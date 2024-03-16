@@ -15,8 +15,9 @@ export class UserFormComponent {
 
   userForm: FormGroup;
   userServices = inject(UserService);
-  router = inject(Router)
-  activatedRoute = inject(ActivatedRoute)
+  router = inject(Router);
+  activatedRoute = inject(ActivatedRoute);
+  nameButton: String = "Guardar";
 
   constructor() {
     this.userForm = new FormGroup({
@@ -30,6 +31,7 @@ export class UserFormComponent {
   ngOnInit() {
     this.activatedRoute.params.subscribe(async (params: any) => {
       if (params.id) {
+        this.nameButton = "Actualizar";
         const response = await this.userServices.getById(params.id)
         this.userForm = new FormGroup({
           _id: new FormControl(response._id, []),
@@ -38,19 +40,15 @@ export class UserFormComponent {
           email: new FormControl(response.email, [Validators.required, Validators.email]),
           img: new FormControl(response.image, [Validators.required])
         }, [])
-
-
       }
     })
   }
 
   async getDataForm() {
-    console.log("this.userForm.value._id", this.userForm.value._id);
     if (this.userForm.value._id) {
       //actualizando
       const response = await this.userServices.update(this.userForm.value);
       if (response.id) {
-        console.log("Actualización response: ", response);
         Swal.fire(`El usuario ${response.first_name} ${response.last_name} se ha actualizado correctamente`);
         this.router.navigate(['/home'])
       }
@@ -60,7 +58,6 @@ export class UserFormComponent {
     } else {
       const response = await this.userServices.insert(this.userForm.value)
       if (response.id) {
-        console.log("Inserción response: ", response);
         Swal.fire(`El usuario ${response.first_name} ${response.last_name} se ha añadido correctamente`)
         this.router.navigate(['/home'])
       } else {

@@ -38,7 +38,9 @@
             }
         </div>
 
-
-        <input type="submit" value="Enviar" class="btn btn-secondary" [disabled]="!userForm.valid">
+        <div class="my-2">
+            <input type="submit" [value]="nameButton" class="btn btn-secondary pt" [disabled]="!userForm.valid">
+        </div>
+        
     </form>
 </section>

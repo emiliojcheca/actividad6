@@ -20,8 +20,6 @@ export class UserListComponent {
 
     try {
       this.arrUsers = await this.userServices.getAll();
-
-      console.log("tenemos los usuarios: ", this.arrUsers);
     } catch (err) {
       console.log(err)
     }

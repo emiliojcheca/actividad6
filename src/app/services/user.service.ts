@@ -26,7 +26,6 @@ export class UserService {
   }
 
   getById(id: string): Promise<IUser> {
-    console.log("Petición: ", `${this.baseUrl}/${id}`);
     return lastValueFrom(this.httpClient.get<IUser>(`${this.baseUrl}/${id}`));
   }
 
