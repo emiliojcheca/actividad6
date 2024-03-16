@@ -3,6 +3,8 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { IUser } from '../../interfaces/iuser.interface';
 import Swal from 'sweetalert2';
+import { UserCardComponent } from '../../components/user-card/user-card.component';
+import { UserUtils } from '../../utils/user.utils';
 
 @Component({
   selector: 'app-user-view',
@@ -16,6 +18,7 @@ export class UserViewComponent {
   activatedRoute = inject(ActivatedRoute);
   router = inject(Router)
   userServices = inject(UserService);
+  userUtils = inject(UserUtils);
   user: IUser = {
     _id: "",
     id: 0,
@@ -38,32 +41,7 @@ export class UserViewComponent {
   }
 
   async deleteUser(id: string | undefined) {
-    // llamar al servicio para borrar usuario
-    if (id !== undefined) {
-
-      Swal.fire({
-        title: "¿Seguro que desea eliminar al usuario " + this.user.first_name + " " + this.user.last_name + "?",
-        text: "No podrá revertir esta",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        cancelButtonText: "Cancelar",
-        confirmButtonText: "Eliminar"
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          let response = await this.userServices.delete(id);
-          if (response._id) {
-            Swal.fire({
-              title: "Eliminado!",
-              text: "Se ha borrado correctamente el usuario " + response.first_name + " " + response.last_name,
-              icon: "success"
-            });
-            this.router.navigate(['/home']);
-          }
-        }
-      });
-    }
+    this.userUtils.deleteUser(id, this.user);
   }
 
 }
